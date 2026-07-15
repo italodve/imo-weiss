@@ -1,7 +1,7 @@
 {
   "name": "imo-weiss",
   "version": "1.0.0",
-  "description": "Cabral Imóveis — site institucional + painel administrativo + assistente de IA (Claude) em um único serviço Node/Express com banco SQLite embutido",
+  "description": "Martins Imóveis — site institucional + painel administrativo + assistente de IA (Claude) em um único serviço Node/Express com banco SQLite embutido",
   "type": "module",
   "main": "src/server.js",
   "scripts": {
