@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f7f5f0" />
+    <meta
+      name="description"
+      content="Weiss Imóveis: imobiliária boutique da zona oeste de São Paulo. Venda e aluguel de imóveis residenciais e comerciais em Pinheiros, Vila Madalena, Perdizes e região, com avaliação técnica e acompanhamento jurídico completo."
+    />
+    <title>Weiss Imóveis · Venda e Aluguel na Zona Oeste de São Paulo</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Marcellus&family=Figtree:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css?v=1" />
+    <script src="app.js?v=1" defer></script>
+  </head>
+  <body>
+    <a class="pular" href="#topo">Ir para o conteúdo</a>
+
+    <header class="topo-site" data-topo>
+      <a class="marca" href="#topo" aria-label="Weiss Imóveis">
+        <span class="marca-selo" aria-hidden="true">W</span>
+        <span class="marca-texto">
+          <strong>Weiss Imóveis</strong>
+          <small>Zona oeste · São Paulo</small>
+        </span>
+      </a>
+
+      <button class="botao-menu" type="button" aria-label="Abrir menu" aria-expanded="false" data-botao-menu>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="navegacao" data-navegacao aria-label="Navegação principal">
+        <a href="#vitrine">Imóveis</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#processo">Como funciona</a>
+        <a href="#sobre">A Weiss</a>
+        <a href="#contato">Contato</a>
+      </nav>
+
+      <a class="botao solido topo-cta" href="#contato">Falar com a Weiss</a>
+    </header>
+
+    <main id="topo">
+      <!-- HERO -->
+      <section class="hero">
+        <div class="hero-texto" data-surgir>
+          <p class="rotulo">Imobiliária boutique · Pinheiros e região</p>
+          <h1>Morar bem começa com quem conhece cada rua do bairro.</h1>
+          <p class="hero-apoio">
+            A Weiss Imóveis cuida da venda e do aluguel do seu imóvel na zona oeste de São Paulo
+            com avaliação técnica de preço, curadoria honesta e acompanhamento jurídico até a
+            assinatura — sem pressa e sem empurrar imóvel que não serve.
+          </p>
+          <div class="hero-botoes">
+            <a class="botao solido" href="#vitrine">Explorar a vitrine</a>
+            <a class="botao contorno" href="#contato">Anunciar meu imóvel</a>
+          </div>
+          <dl class="hero-numeros">
+            <div><dt>15 anos</dt><dd>de zona oeste</dd></div>
+            <div><dt>+900</dt><dd>negócios fechados</dd></div>
+            <div><dt>100%</dt><dd>com revisão jurídica</dd></div>
+          </dl>
+        </div>
+
+        <div class="hero-arte" data-surgir aria-hidden="true">
+          <svg viewBox="0 0 520 420" role="img" aria-label="Ilustração de casario e prédios da zona oeste">
+            <defs>
+              <linearGradient id="ceu" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#eaf2ee"/>
+                <stop offset="1" stop-color="#d8e7df"/>
+              </linearGradient>
+              <linearGradient id="predio" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#1d6b5e"/>
+                <stop offset="1" stop-color="#14544a"/>
+              </linearGradient>
+            </defs>
+            <rect x="0" y="0" width="520" height="420" rx="24" fill="url(#ceu)"/>
+            <circle cx="425" cy="80" r="38" fill="#f2c94c" opacity="0.85"/>
+            <g opacity="0.35" fill="#14544a">
+              <rect x="40" y="150" width="70" height="230" rx="6"/>
+              <rect x="420" y="170" width="60" height="210" rx="6"/>
+            </g>
+            <rect x="130" y="110" width="110" height="270" rx="8" fill="url(#predio)"/>
+            <g fill="#f7f5f0" opacity="0.9">
+              <rect x="148" y="135" width="20" height="26" rx="3"/><rect x="176" y="135" width="20" height="26" rx="3"/><rect x="204" y="135" width="20" height="26" rx="3"/>
+              <rect x="148" y="180" width="20" height="26" rx="3"/><rect x="176" y="180" width="20" height="26" rx="3"/><rect x="204" y="180" width="20" height="26" rx="3"/>
+              <rect x="148" y="225" width="20" height="26" rx="3"/><rect x="176" y="225" width="20" height="26" rx="3"/><rect x="204" y="225" width="20" height="26" rx="3"/>
+              <rect x="148" y="270" width="20" height="26" rx="3"/><rect x="176" y="270" width="20" height="26" rx="3"/><rect x="204" y="270" width="20" height="26" rx="3"/>
+            </g>
+            <g>
+              <rect x="265" y="230" width="150" height="150" rx="8" fill="#fdfcfa" stroke="#22211d" stroke-width="3"/>
+              <path d="M255 235 L340 165 L425 235" fill="none" stroke="#22211d" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+              <rect x="292" y="290" width="38" height="90" rx="4" fill="#14544a"/>
+              <rect x="352" y="280" width="36" height="34" rx="4" fill="#cfe3da" stroke="#22211d" stroke-width="3"/>
+            </g>
+            <g stroke="#1d6b5e" stroke-width="4" stroke-linecap="round">
+              <path d="M62 380 q10 -34 0 -62" fill="none"/>
+              <circle cx="62" cy="304" r="16" fill="#2c8a72" stroke="none"/>
+              <path d="M470 380 q-8 -28 0 -50" fill="none"/>
+              <circle cx="470" cy="318" r="13" fill="#2c8a72" stroke="none"/>
+            </g>
+            <rect x="0" y="378" width="520" height="42" fill="#22211d" opacity="0.85"/>
+          </svg>
+          <div class="hero-etiqueta">
+            <strong>Venda · Aluguel · Avaliação</strong>
+            <span>Residencial e comercial, do anúncio à escritura</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- DIFERENCIAIS -->
+      <section class="diferenciais" aria-label="Diferenciais" data-surgir>
+        <article>
+          <h3>Preço com fundamento</h3>
+          <p>Avaliação baseada em vendas reais do bairro, não em achismo — o imóvel entra no mercado para vender.</p>
+        </article>
+        <article>
+          <h3>Curadoria de verdade</h3>
+          <p>Você visita poucos imóveis, todos dentro do perfil e do orçamento. Seu sábado vale mais que isso.</p>
+        </article>
+        <article>
+          <h3>Jurídico do início ao fim</h3>
+          <p>Certidões, matrícula e contrato revisados antes de qualquer assinatura. Sem surpresa depois.</p>
+        </article>
+        <article>
+          <h3>Uma pessoa cuida de você</h3>
+          <p>Um consultor único acompanha o caso inteiro — nada de recomeçar a história a cada ligação.</p>
+        </article>
+      </section>
+
+      <!-- VITRINE -->
+      <section class="secao vitrine" id="vitrine">
+        <header class="secao-cabeca" data-surgir>
+          <div>
+            <p class="rotulo claro">Vitrine</p>
+            <h2>Imóveis escolhidos a dedo pela Weiss.</h2>
+          </div>
+          <p class="secao-apoio">
+            A vitrine é atualizada toda semana. Não achou o seu? Conte o que procura —
+            grande parte dos nossos fechamentos vem de imóveis fora do site.
+          </p>
+        </header>
+
+        <div class="vitrine-painel" data-surgir>
+          <form class="busca" data-busca aria-label="Buscar imóveis">
+            <div class="busca-abas" role="group" aria-label="Tipo de negócio">
+              <button type="button" class="aba ativa" data-aba-negocio="" aria-pressed="true">Tudo</button>
+              <button type="button" class="aba" data-aba-negocio="venda" aria-pressed="false">Comprar</button>
+              <button type="button" class="aba" data-aba-negocio="aluguel" aria-pressed="false">Alugar</button>
+            </div>
+            <div class="busca-campos">
+              <label class="campo campo-largo">
+                <span>Busca livre</span>
+                <input type="search" name="q" placeholder="Ex.: varanda, quintal, Vila Madalena…" data-busca-texto />
+              </label>
+              <label class="campo">
+                <span>Categoria</span>
+                <select data-busca-categoria>
+                  <option value="">Todas</option>
+                  <option value="apartamento">Apartamento</option>
+                  <option value="casa">Casa</option>
+                  <option value="cobertura">Cobertura</option>
+                  <option value="comercial">Comercial</option>
+                  <option value="terreno">Terreno</option>
+                </select>
+              </label>
+              <label class="campo">
+                <span>Bairro</span>
+                <select data-busca-bairro>
+                  <option value="">Todos</option>
+                </select>
+              </label>
+              <label class="campo">
+                <span>Quartos</span>
+                <select data-busca-quartos>
+                  <option value="">Tanto faz</option>
+                  <option value="1">1+</option>
+                  <option value="2">2+</option>
+                  <option value="3">3+</option>
+                  <option value="4">4+</option>
+                </select>
+              </label>
+              <label class="campo">
+                <span>Até</span>
+                <select data-busca-teto>
+                  <option value="">Sem teto</option>
+                  <option value="3500">R$ 3.500</option>
+                  <option value="6000">R$ 6.000</option>
+                  <option value="10000">R$ 10.000</option>
+                  <option value="600000">R$ 600.000</option>
+                  <option value="900000">R$ 900.000</option>
+                  <option value="1500000">R$ 1.500.000</option>
+                  <option value="2500000">R$ 2.500.000</option>
+                </select>
+              </label>
+            </div>
+          </form>
+
+          <div class="cartoes" data-cartoes aria-live="polite"></div>
+
+          <p class="vitrine-vazia" data-busca-vazia hidden>
+            Nenhum imóvel da vitrine bate com esses filtros.
+            <a href="#contato">Conte o que procura</a> — buscamos fora do site também.
+          </p>
+        </div>
+      </section>
+
+      <!-- SERVIÇOS -->
+      <section class="secao" id="servicos">
+        <header class="secao-cabeca" data-surgir>
+          <div>
+            <p class="rotulo">Serviços</p>
+            <h2>Três frentes, um mesmo cuidado.</h2>
+          </div>
+          <p class="secao-apoio">
+            Compra, venda ou aluguel: a Weiss assume a parte chata — avaliação, divulgação,
+            filtro de interessados e papelada — para você decidir com calma.
+          </p>
+        </header>
+
+        <div class="servicos">
+          <article class="servico" data-surgir>
+            <span class="servico-num">01</span>
+            <h3>Comprar com segurança</h3>
+            <p>Definimos o perfil, filtramos a oferta do bairro, acompanhamos as visitas e negociamos com a documentação já verificada.</p>
+          </article>
+          <article class="servico" data-surgir>
+            <span class="servico-num">02</span>
+            <h3>Vender no preço certo</h3>
+            <p>Avaliação técnica, fotos e anúncio profissionais, compradores pré-qualificados e condução da proposta até a escritura.</p>
+          </article>
+          <article class="servico" data-surgir>
+            <span class="servico-num">03</span>
+            <h3>Alugar sem atrito</h3>
+            <p>Seleção criteriosa de inquilino ou imóvel, contrato equilibrado e suporte durante toda a locação — para os dois lados.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- PROCESSO -->
+      <section class="secao processo" id="processo">
+        <header class="secao-cabeca estreita" data-surgir>
+          <p class="rotulo">Como funciona</p>
+          <h2>Do primeiro café à entrega das chaves.</h2>
+        </header>
+
+        <ol class="etapas">
+          <li data-surgir>
+            <h3>Conversa inicial</h3>
+            <p>Entendemos objetivo, orçamento, bairro e prazo. Sem formulário frio: é uma conversa.</p>
+          </li>
+          <li data-surgir>
+            <h3>Estratégia</h3>
+            <p>Preço fundamentado, plano de divulgação ou roteiro de visitas — com expectativa realista desde o dia um.</p>
+          </li>
+          <li data-surgir>
+            <h3>Negociação</h3>
+            <p>Propostas e contrapropostas conduzidas por quem faz isso todos os dias, sempre te mantendo a par.</p>
+          </li>
+          <li data-surgir>
+            <h3>Fechamento</h3>
+            <p>Documentos, financiamento e contrato revisados pelo jurídico até a assinatura — e as chaves na mão.</p>
+          </li>
+        </ol>
+      </section>
+
+      <!-- SOBRE -->
+      <section class="secao sobre" id="sobre">
+        <div class="sobre-arte" data-surgir aria-hidden="true">
+          <svg viewBox="0 0 420 340" role="img" aria-label="Ilustração de chave e planta de imóvel">
+            <rect x="0" y="0" width="420" height="340" rx="24" fill="#14544a"/>
+            <g stroke="#f7f5f0" stroke-width="2" opacity="0.35" fill="none">
+              <rect x="40" y="40" width="200" height="150"/>
+              <path d="M40 115 h90 M130 40 v75 M175 115 v75 M130 150 h110"/>
+            </g>
+            <g transform="translate(255 170) rotate(35)">
+              <circle cx="0" cy="0" r="42" fill="none" stroke="#f2c94c" stroke-width="14"/>
+              <rect x="30" y="-8" width="120" height="16" rx="8" fill="#f2c94c"/>
+              <rect x="112" y="4" width="14" height="26" rx="4" fill="#f2c94c"/>
+              <rect x="136" y="4" width="14" height="34" rx="4" fill="#f2c94c"/>
+            </g>
+            <text x="40" y="290" fill="#f7f5f0" font-family="Georgia, serif" font-size="26">Cada imóvel tem uma história.</text>
+            <text x="40" y="316" fill="#cfe3da" font-family="Georgia, serif" font-size="26">Nós cuidamos do próximo capítulo.</text>
+          </svg>
+        </div>
+        <div class="sobre-texto" data-surgir>
+          <p class="rotulo">A Weiss</p>
+          <h2>Pequena por escolha, criteriosa por princípio.</h2>
+          <p>
+            A Weiss Imóveis nasceu em Pinheiros com uma convicção simples: imóvel não é
+            estoque, é projeto de vida. Por isso a carteira é enxuta, cada cliente tem um
+            consultor fixo e nenhum contrato vai à assinatura sem revisão jurídica.
+          </p>
+          <ul class="sobre-lista">
+            <li><strong>Transparência</strong> — você sabe em que pé está a negociação, sempre.</li>
+            <li><strong>Critério</strong> — só entra na carteira imóvel que a gente anunciaria para a própria família.</li>
+            <li><strong>Proximidade</strong> — WhatsApp direto com quem cuida do seu caso, sem fila de atendimento.</li>
+          </ul>
+          <a class="botao solido" href="#contato">Conversar com um consultor</a>
+        </div>
+      </section>
+
+      <!-- DEPOIMENTO -->
+      <section class="depoimento" data-surgir>
+        <blockquote>
+          <p>“Colocamos o apartamento com outra imobiliária por oito meses, sem proposta. A Weiss reavaliou o preço, refez o anúncio e vendeu em cinco semanas — com toda a papelada revisada antes de assinarmos qualquer coisa.”</p>
+          <cite>Família vendedora · Perdizes</cite>
+        </blockquote>
+      </section>
+
+      <!-- CONTATO -->
+      <section class="contato" id="contato">
+        <div class="contato-texto" data-surgir>
+          <p class="rotulo claro">Contato</p>
+          <h2>Conte o que você procura. A Weiss faz o resto.</h2>
+          <p>
+            Diga se quer comprar, vender ou alugar, e em qual bairro. Um consultor responde
+            pelo WhatsApp com uma conversa sem compromisso.
+          </p>
+          <ul class="contato-lista">
+            <li>
+              <span>WhatsApp</span>
+              <a href="https://wa.me/5511900000000" target="_blank" rel="noopener noreferrer" data-link-whatsapp>+55 11 90000-0000</a>
+            </li>
+            <li>
+              <span>Região</span>
+              <span>Pinheiros, Vila Madalena, Perdizes, Alto de Pinheiros, Lapa e Pompeia</span>
+            </li>
+            <li>
+              <span>Atendimento</span>
+              <span>Segunda a sábado, das 9h às 19h</span>
+            </li>
+          </ul>
+        </div>
+
+        <form class="formulario" data-formulario data-surgir>
+          <label>
+            Nome
+            <input type="text" name="nome" placeholder="Como podemos te chamar?" required />
+          </label>
+          <label>
+            WhatsApp
+            <input type="tel" name="telefone" placeholder="(11) 9…" required />
+          </label>
+          <label>
+            Objetivo
+            <select name="objetivo" required>
+              <option value="">Escolha uma opção</option>
+              <option>Comprar um imóvel</option>
+              <option>Vender um imóvel</option>
+              <option>Alugar um imóvel</option>
+              <option>Colocar imóvel para alugar</option>
+              <option>Avaliar meu imóvel</option>
+            </select>
+          </label>
+          <label>
+            Detalhes
+            <textarea name="detalhes" rows="4" placeholder="Bairro, tipo de imóvel, faixa de valor…"></textarea>
+          </label>
+          <button class="botao solido" type="submit">Enviar pelo WhatsApp</button>
+          <p class="formulario-nota">Ao enviar, abrimos o WhatsApp da Weiss com a mensagem pronta.</p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="rodape">
+      <div class="rodape-marca">
+        <strong>Weiss Imóveis</strong>
+        <span>Venda e aluguel na zona oeste de São Paulo</span>
+      </div>
+      <div class="rodape-links">
+        <a href="https://wa.me/5511900000000" target="_blank" rel="noopener noreferrer" data-link-whatsapp>WhatsApp</a>
+        <a href="#topo">Voltar ao topo</a>
+        <a href="/admin/">Painel</a>
+      </div>
+    </footer>
+
+    <!-- CHAT -->
+    <aside class="chat" data-chat aria-live="polite">
+      <button class="chat-abrir" type="button" aria-label="Abrir conversa com a Ana" data-chat-abrir>
+        <span class="chat-pulso"></span>
+        Falar com a Ana
+      </button>
+
+      <section class="chat-janela" aria-label="Conversa com a assistente da Weiss Imóveis">
+        <header class="chat-cabeca">
+          <div>
+            <strong>Ana · Weiss Imóveis</strong>
+            <span>Assistente virtual</span>
+          </div>
+          <button type="button" aria-label="Fechar conversa" data-chat-fechar>×</button>
+        </header>
+
+        <div class="chat-corpo" data-chat-corpo>
+          <div class="balao ana" data-chat-saudacao>
+            Oi! Eu sou a Ana, da Weiss Imóveis. Você quer comprar, vender ou alugar um imóvel?
+          </div>
+        </div>
+
+        <form class="chat-form" data-chat-form>
+          <input type="text" name="texto" autocomplete="off" placeholder="Escreva aqui…" data-chat-input required />
+          <button type="submit">Enviar</button>
+        </form>
+
+        <p class="chat-nota">Seus dados são usados só para o retorno do atendimento.</p>
+      </section>
+    </aside>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "name": "imo-weiss",
+  "version": "1.0.0",
+  "description": "Weiss Imóveis — site institucional + painel administrativo + assistente de IA (Claude) em um único serviço Node/Express com banco SQLite embutido",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.85.0",
+    "better-sqlite3": "^12.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.0",
+    "express": "^5.1.0",
+    "express-rate-limit": "^7.5.0"
+  }
+}

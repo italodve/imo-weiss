@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <meta name="description" content="Painel Weiss Imóveis: anúncios do site e fichas de clientes." />
+    <title>Weiss Imóveis · Painel</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="admin.css?v=1" />
+    <script src="admin.js?v=1" defer></script>
+  </head>
+  <body>
+    <header class="barra">
+      <div class="barra-marca">
+        <span class="barra-selo" aria-hidden="true">W</span>
+        <div>
+          <strong>Weiss Imóveis</strong>
+          <small>Painel</small>
+        </div>
+      </div>
+
+      <nav class="barra-abas" aria-label="Seções do painel">
+        <button class="barra-aba ativa" data-aba="resumo" type="button">Resumo</button>
+        <button class="barra-aba" data-aba="anuncios" type="button">Anúncios</button>
+        <button class="barra-aba" data-aba="fichas" type="button">Fichas</button>
+      </nav>
+
+      <div class="barra-acoes">
+        <span class="estado-conexao" data-conexao>Conectando…</span>
+        <button class="botao vazado" type="button" data-recarregar>Atualizar</button>
+        <button class="botao cheio" type="button" data-novo-anuncio>+ Anúncio</button>
+        <a class="botao vazado" href="/admin/sair">Sair</a>
+      </div>
+    </header>
+
+    <main class="conteudo">
+      <!-- RESUMO -->
+      <section class="tela ativa" data-tela="resumo">
+        <div class="indicadores">
+          <article class="indicador">
+            <span>Anúncios no total</span>
+            <strong data-num="anuncios">0</strong>
+          </article>
+          <article class="indicador">
+            <span>Ativos no site</span>
+            <strong data-num="ativos">0</strong>
+          </article>
+          <article class="indicador">
+            <span>Fichas de clientes</span>
+            <strong data-num="fichas">0</strong>
+          </article>
+          <article class="indicador">
+            <span>Fichas recebidas</span>
+            <strong data-num="recebidas">0</strong>
+          </article>
+        </div>
+
+        <div class="colunas">
+          <section class="bloco">
+            <header class="bloco-cabeca"><h2>Anúncios por situação</h2></header>
+            <div class="grafico-barras" data-grafico></div>
+          </section>
+
+          <section class="bloco">
+            <header class="bloco-cabeca">
+              <h2>Últimas fichas</h2>
+              <button class="link-texto" data-aba-link="fichas" type="button">Ver todas</button>
+            </header>
+            <div class="fichas-recentes" data-fichas-recentes></div>
+          </section>
+        </div>
+      </section>
+
+      <!-- ANÚNCIOS -->
+      <section class="tela" data-tela="anuncios">
+        <div class="ferramentas">
+          <input type="search" placeholder="Buscar por título, bairro, cidade…" data-filtro-anuncio-texto />
+          <select data-filtro-anuncio-situacao>
+            <option value="">Todas as situações</option>
+            <option value="Ativo">Ativo</option>
+            <option value="Em negociação">Em negociação</option>
+            <option value="Vendido">Vendido</option>
+            <option value="Alugado">Alugado</option>
+          </select>
+          <button class="botao vazado" type="button" data-exportar-anuncios>Exportar CSV</button>
+        </div>
+        <div class="grade-anuncios" data-grade-anuncios></div>
+        <p class="sem-dados" data-anuncios-vazio hidden>
+          Nenhum anúncio ainda. Clique em "+ Anúncio" para publicar o primeiro imóvel no site.
+        </p>
+      </section>
+
+      <!-- FICHAS -->
+      <section class="tela" data-tela="fichas">
+        <div class="ferramentas">
+          <input type="search" placeholder="Buscar ficha…" data-filtro-ficha-texto />
+          <select data-filtro-ficha-etapa>
+            <option value="">Todas as etapas</option>
+            <option value="recebido">Recebido</option>
+            <option value="conversando">Conversando</option>
+            <option value="fechado">Fechado</option>
+          </select>
+          <button class="botao vazado" type="button" data-exportar-fichas>Exportar CSV</button>
+        </div>
+        <div class="rolagem-tabela">
+          <table class="tabela">
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Cliente</th>
+                <th>Origem</th>
+                <th>Etapa</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody data-linhas-fichas></tbody>
+          </table>
+        </div>
+        <p class="sem-dados" data-fichas-vazio hidden>
+          Nenhuma ficha ainda. Elas chegam sozinhas quando a Ana conversa com visitantes do site.
+        </p>
+      </section>
+    </main>
+
+    <!-- MODAL DE ANÚNCIO -->
+    <div class="veu" data-veu hidden>
+      <div class="dialogo" role="dialog" aria-modal="true" aria-labelledby="titulo-dialogo">
+        <header class="dialogo-cabeca">
+          <h2 id="titulo-dialogo" data-dialogo-titulo>Novo anúncio</h2>
+          <button type="button" aria-label="Fechar" data-fechar-dialogo>×</button>
+        </header>
+        <form class="dialogo-form" data-form-anuncio>
+          <input type="hidden" name="id" />
+          <div class="dialogo-grade">
+            <label>Título<input type="text" name="titulo" placeholder="Ex.: Casa de vila em Pinheiros" required /></label>
+            <label>Categoria
+              <select name="categoria" required>
+                <option>Apartamento</option>
+                <option>Casa</option>
+                <option>Cobertura</option>
+                <option>Comercial</option>
+                <option>Terreno</option>
+              </select>
+            </label>
+            <label>Negócio
+              <select name="negocio" required>
+                <option>Venda</option>
+                <option>Aluguel</option>
+              </select>
+            </label>
+            <label>Situação
+              <select name="situacao" required>
+                <option>Ativo</option>
+                <option>Em negociação</option>
+                <option>Vendido</option>
+                <option>Alugado</option>
+              </select>
+            </label>
+            <label>Preço (R$)<input type="number" name="preco" min="0" step="1" placeholder="890000" /></label>
+            <label>Bairro<input type="text" name="bairro" placeholder="Pinheiros" /></label>
+            <label>Cidade<input type="text" name="cidade" placeholder="São Paulo" /></label>
+            <label>Quartos<input type="number" name="quartos" min="0" step="1" placeholder="2" /></label>
+            <label>Banheiros<input type="number" name="banheiros" min="0" step="1" placeholder="1" /></label>
+            <label>Vagas<input type="number" name="vagas" min="0" step="1" placeholder="1" /></label>
+            <label>Área (m²)<input type="number" name="area" min="0" step="1" placeholder="74" /></label>
+            <label class="inteira">Foto (arquivo)
+              <input type="file" name="fotoArquivo" accept="image/jpeg,image/png,image/webp,image/gif" data-arquivo-foto />
+              <small class="dica" data-dica-foto>JPG, PNG, WebP ou GIF até 5 MB. Enviar arquivo substitui a foto atual.</small>
+            </label>
+            <label class="inteira">ou URL da foto<input type="url" name="foto" placeholder="https://… (opcional, se não enviar arquivo)" /></label>
+            <label class="inteira">Detalhes<textarea name="detalhes" rows="3" placeholder="Pontos fortes do imóvel"></textarea></label>
+          </div>
+          <div class="dialogo-acoes">
+            <button type="button" class="botao vazado" data-fechar-dialogo>Cancelar</button>
+            <button type="submit" class="botao cheio">Salvar anúncio</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="aviso" data-aviso hidden></div>
+  </body>
+</html>

@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Weiss Imóveis · Acesso ao painel</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <style>
+      :root {
+        --tinta: #22211d;
+        --papel: #f7f5f0;
+        --cartao: #ffffff;
+        --verde: #14544a;
+        --verde-escuro: #0d3d36;
+        --linha: #e4dfd4;
+        --erro: #b3372f;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+
+      body {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+        color: var(--tinta);
+        background:
+          radial-gradient(70rem 40rem at 110% -10%, rgba(20, 84, 74, 0.12), transparent 60%),
+          radial-gradient(50rem 30rem at -20% 110%, rgba(20, 84, 74, 0.1), transparent 55%),
+          var(--papel);
+      }
+
+      .cartao {
+        width: min(380px, 100%);
+        background: var(--cartao);
+        border: 1px solid var(--linha);
+        border-radius: 18px;
+        padding: 36px 32px;
+        box-shadow: 0 24px 60px -30px rgba(34, 33, 29, 0.35);
+      }
+
+      .marca {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 26px;
+      }
+
+      .marca-selo {
+        width: 44px;
+        height: 44px;
+        display: grid;
+        place-items: center;
+        border-radius: 12px;
+        background: var(--verde);
+        color: #fff;
+        font-weight: 700;
+        font-size: 20px;
+        letter-spacing: 0.5px;
+      }
+
+      .marca strong {
+        display: block;
+        font-size: 17px;
+      }
+
+      .marca small {
+        color: #77736a;
+        font-size: 13px;
+      }
+
+      h1 {
+        font-size: 21px;
+        margin-bottom: 6px;
+      }
+
+      .sub {
+        color: #77736a;
+        font-size: 14px;
+        margin-bottom: 22px;
+      }
+
+      label {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 14px;
+      }
+
+      input {
+        width: 100%;
+        margin-top: 6px;
+        padding: 11px 13px;
+        border: 1px solid var(--linha);
+        border-radius: 10px;
+        font-size: 15px;
+        background: #fdfcfa;
+      }
+
+      input:focus {
+        outline: 2px solid var(--verde);
+        outline-offset: 1px;
+        border-color: var(--verde);
+      }
+
+      button {
+        width: 100%;
+        margin-top: 8px;
+        padding: 12px;
+        border: 0;
+        border-radius: 10px;
+        background: var(--verde);
+        color: #fff;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: var(--verde-escuro);
+      }
+
+      .aviso-erro {
+        display: none;
+        margin-bottom: 16px;
+        padding: 10px 12px;
+        border-radius: 10px;
+        background: rgba(179, 55, 47, 0.09);
+        color: var(--erro);
+        font-size: 13.5px;
+      }
+
+      body.com-erro .aviso-erro {
+        display: block;
+      }
+
+      .voltar {
+        display: block;
+        margin-top: 18px;
+        text-align: center;
+        font-size: 13.5px;
+        color: #77736a;
+        text-decoration: none;
+      }
+
+      .voltar:hover {
+        color: var(--verde);
+      }
+    </style>
+  </head>
+  <body>
+    <main class="cartao">
+      <div class="marca">
+        <span class="marca-selo" aria-hidden="true">W</span>
+        <span>
+          <strong>Weiss Imóveis</strong>
+          <small>Painel administrativo</small>
+        </span>
+      </div>
+
+      <h1>Entrar no painel</h1>
+      <p class="sub">Gerencie os anúncios do site e as fichas de clientes.</p>
+
+      <p class="aviso-erro" role="alert">Usuário ou senha incorretos. Tente novamente.</p>
+
+      <form method="post" action="/admin/entrar">
+        <label>
+          Usuário
+          <input type="text" name="usuario" autocomplete="username" required autofocus />
+        </label>
+        <label>
+          Senha
+          <input type="password" name="senha" autocomplete="current-password" required />
+        </label>
+        <button type="submit">Entrar</button>
+      </form>
+
+      <a class="voltar" href="/">← Voltar para o site</a>
+    </main>
+
+    <script>
+      if (new URLSearchParams(window.location.search).has("erro")) {
+        document.body.classList.add("com-erro");
+      }
+    </script>
+  </body>
+</html>

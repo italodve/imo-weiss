@@ -1,0 +1,647 @@
+/* ============================================================
+   Weiss Imóveis — painel administrativo
+   ============================================================ */
+
+:root {
+  --fundo: #f2f0ea;
+  --cartao: #ffffff;
+  --tinta: #22211d;
+  --tinta-suave: #6d6a61;
+  --verde: #14544a;
+  --verde-escuro: #0d3d36;
+  --verde-claro: #eaf2ee;
+  --ouro: #f2c94c;
+  --linha: #e4dfd4;
+  --erro: #b3372f;
+  --raio: 14px;
+  --sombra: 0 18px 44px -28px rgba(34, 33, 29, 0.4);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Figtree", "Segoe UI", system-ui, sans-serif;
+  background: var(--fundo);
+  color: var(--tinta);
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* ---- barra superior ---- */
+
+.barra {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 12px clamp(16px, 3vw, 32px);
+  background: var(--cartao);
+  border-bottom: 1px solid var(--linha);
+}
+
+.barra-marca {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: 8px;
+}
+
+.barra-selo {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: var(--verde);
+  color: #fff;
+  font-weight: 700;
+  font-size: 19px;
+}
+
+.barra-marca strong {
+  display: block;
+  font-size: 15px;
+  line-height: 1.2;
+}
+
+.barra-marca small {
+  color: var(--tinta-suave);
+  font-size: 12px;
+}
+
+.barra-abas {
+  display: flex;
+  gap: 4px;
+  background: var(--fundo);
+  border-radius: 999px;
+  padding: 4px;
+}
+
+.barra-aba {
+  border: 0;
+  background: transparent;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--tinta-suave);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.barra-aba.ativa {
+  background: var(--verde);
+  color: #fff;
+}
+
+.barra-acoes {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.estado-conexao {
+  font-size: 12.5px;
+  color: var(--tinta-suave);
+  padding-left: 14px;
+  position: relative;
+}
+
+.estado-conexao::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #c9c4b8;
+}
+
+.estado-conexao.ligado::before {
+  background: #23a455;
+}
+
+.estado-conexao.desligado::before {
+  background: var(--erro);
+}
+
+/* ---- botões ---- */
+
+.botao {
+  display: inline-block;
+  padding: 9px 16px;
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.botao.cheio {
+  background: var(--verde);
+  color: #fff;
+}
+
+.botao.cheio:hover {
+  background: var(--verde-escuro);
+}
+
+.botao.vazado {
+  border-color: var(--linha);
+  background: var(--cartao);
+  color: var(--tinta);
+}
+
+.botao.vazado:hover {
+  border-color: var(--verde);
+  color: var(--verde);
+}
+
+.link-texto {
+  border: 0;
+  background: none;
+  color: var(--verde);
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.link-texto:hover {
+  text-decoration: underline;
+}
+
+/* ---- telas ---- */
+
+.conteudo {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: clamp(18px, 3vw, 32px);
+}
+
+.tela {
+  display: none;
+}
+
+.tela.ativa {
+  display: block;
+}
+
+/* ---- resumo ---- */
+
+.indicadores {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.indicador {
+  background: var(--cartao);
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+  padding: 18px 20px;
+}
+
+.indicador span {
+  font-size: 13px;
+  color: var(--tinta-suave);
+}
+
+.indicador strong {
+  display: block;
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--verde);
+}
+
+.colunas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.bloco {
+  background: var(--cartao);
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+  padding: 20px;
+}
+
+.bloco-cabeca {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.bloco-cabeca h2 {
+  font-size: 16px;
+}
+
+.grafico-barras {
+  display: grid;
+  gap: 12px;
+}
+
+.barra-item {
+  display: grid;
+  grid-template-columns: 120px 1fr 30px;
+  align-items: center;
+  gap: 10px;
+  font-size: 13.5px;
+}
+
+.barra-trilho {
+  height: 10px;
+  background: var(--fundo);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.barra-cheia {
+  height: 100%;
+  background: var(--verde);
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+
+.barra-item b {
+  text-align: right;
+}
+
+.fichas-recentes {
+  display: grid;
+  gap: 10px;
+}
+
+.ficha-mini {
+  border: 1px solid var(--linha);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.ficha-mini strong {
+  font-size: 14px;
+}
+
+.ficha-mini small {
+  display: block;
+  color: var(--tinta-suave);
+  margin-top: 2px;
+}
+
+/* ---- ferramentas (filtros) ---- */
+
+.ferramentas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.ferramentas input[type="search"] {
+  flex: 1;
+  min-width: 200px;
+}
+
+.ferramentas input,
+.ferramentas select,
+.dialogo-form input,
+.dialogo-form select,
+.dialogo-form textarea {
+  padding: 10px 12px;
+  border: 1px solid var(--linha);
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: inherit;
+  background: var(--cartao);
+}
+
+.ferramentas input:focus,
+.ferramentas select:focus,
+.dialogo-form input:focus,
+.dialogo-form select:focus,
+.dialogo-form textarea:focus {
+  outline: 2px solid var(--verde);
+  outline-offset: 1px;
+}
+
+/* ---- grade de anúncios ---- */
+
+.grade-anuncios {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 14px;
+}
+
+.anuncio {
+  background: var(--cartao);
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.anuncio-foto {
+  aspect-ratio: 16 / 9;
+  background: var(--verde-claro) center / cover no-repeat;
+  display: grid;
+  place-items: center;
+  color: var(--verde);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.anuncio-corpo {
+  padding: 14px 16px 16px;
+  display: grid;
+  gap: 8px;
+  flex: 1;
+  align-content: start;
+}
+
+.selo {
+  justify-self: start;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--verde-claro);
+  color: var(--verde);
+}
+
+.selo.encerrado {
+  background: #f1e4e3;
+  color: var(--erro);
+}
+
+.selo.negociando {
+  background: #faf0d4;
+  color: #8a6d1a;
+}
+
+.anuncio h3 {
+  font-size: 15.5px;
+  line-height: 1.3;
+}
+
+.anuncio-preco {
+  font-weight: 800;
+  color: var(--verde);
+}
+
+.anuncio-meta {
+  font-size: 12.5px;
+  color: var(--tinta-suave);
+}
+
+.anuncio-acoes {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+/* ---- tabela de fichas ---- */
+
+.rolagem-tabela {
+  overflow-x: auto;
+  background: var(--cartao);
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+}
+
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  min-width: 640px;
+}
+
+.tabela th {
+  text-align: left;
+  font-size: 12px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--tinta-suave);
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--linha);
+}
+
+.tabela td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--linha);
+  vertical-align: top;
+}
+
+.tabela tr:last-child td {
+  border-bottom: 0;
+}
+
+.ficha-nome {
+  font-weight: 700;
+}
+
+.ficha-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 5px;
+}
+
+.ficha-tag {
+  font-size: 12px;
+  background: var(--fundo);
+  border: 1px solid var(--linha);
+  border-radius: 999px;
+  padding: 2px 9px;
+  color: var(--tinta-suave);
+}
+
+.etapa-select {
+  padding: 7px 10px;
+  border: 1px solid var(--linha);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 13px;
+  background: var(--cartao);
+}
+
+.etapa-select.recebido {
+  border-color: #b8cfe0;
+  background: #eef4f9;
+}
+
+.etapa-select.conversando {
+  border-color: #e5d6a5;
+  background: #faf5e3;
+}
+
+.etapa-select.fechado {
+  border-color: #b4d4bd;
+  background: #ecf6ef;
+}
+
+.apagar {
+  border: 0;
+  background: none;
+  color: var(--tinta-suave);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.apagar:hover {
+  color: var(--erro);
+}
+
+.sem-dados {
+  margin-top: 22px;
+  text-align: center;
+  color: var(--tinta-suave);
+}
+
+/* ---- modal ---- */
+
+.veu {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgba(34, 33, 29, 0.45);
+  display: grid;
+  place-items: center;
+  padding: 16px;
+}
+
+.veu[hidden] {
+  display: none;
+}
+
+.dialogo {
+  width: min(680px, 100%);
+  max-height: 92vh;
+  overflow-y: auto;
+  background: var(--cartao);
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+}
+
+.dialogo-cabeca {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--linha);
+}
+
+.dialogo-cabeca h2 {
+  font-size: 17px;
+}
+
+.dialogo-cabeca button {
+  border: 0;
+  background: none;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--tinta-suave);
+}
+
+.dialogo-form {
+  padding: 20px 22px;
+}
+
+.dialogo-grade {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.dialogo-form label {
+  display: grid;
+  gap: 5px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.dialogo-form textarea {
+  resize: vertical;
+}
+
+.inteira {
+  grid-column: 1 / -1;
+}
+
+.dica {
+  font-weight: 400;
+  color: var(--tinta-suave);
+}
+
+.dialogo-acoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+/* ---- aviso (toast) ---- */
+
+.aviso {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  transform: translateX(-50%);
+  z-index: 80;
+  background: var(--tinta);
+  color: #fff;
+  padding: 11px 20px;
+  border-radius: 999px;
+  font-size: 14px;
+  box-shadow: var(--sombra);
+}
+
+/* ---- responsivo ---- */
+
+@media (max-width: 900px) {
+  .indicadores {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .colunas {
+    grid-template-columns: 1fr;
+  }
+
+  .barra-acoes {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 560px) {
+  .indicadores,
+  .dialogo-grade {
+    grid-template-columns: 1fr;
+  }
+
+  .barra-abas {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+  }
+}
