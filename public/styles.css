@@ -1,5 +1,5 @@
 /* ============================================================
-   Martins Imóveis — site público
+   S.J. Martins Corretor de Imóveis — site público
    Paleta: papel #f7f5f0 · tinta #22211d · verde #14544a · ouro #f2c94c
    ============================================================ */
 
@@ -148,7 +148,8 @@ a {
   background: var(--verde);
   color: #fff;
   font-family: var(--fonte-titulo);
-  font-size: 22px;
+  font-size: 17px;
+  letter-spacing: 0.5px;
 }
 
 .marca-texto strong {

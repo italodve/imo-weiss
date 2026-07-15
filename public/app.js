@@ -1,11 +1,11 @@
 /* ============================================================
-   Martins Imóveis — site público
+   S.J. Martins Corretor de Imóveis — site público
    Vitrine dinâmica (API /api/catalogo) + chat com a Ana (Claude)
    ============================================================ */
 
-// WhatsApp oficial da Martins (somente dígitos, com DDI). Se mudar, mantenha
+// WhatsApp oficial de S.J. Martins (somente dígitos, com DDI). Se mudar, mantenha
 // igual ao WHATSAPP_NUMBER do backend e aos links wa.me do index.html.
-const WHATSAPP_MARTINS = "5511982313938";
+const WHATSAPP_SJMARTINS = "5511982313938";
 
 // Base da API. Vazio = mesma origem (site e API no mesmo servidor).
 const API_BASE = "";
@@ -64,7 +64,7 @@ $("[data-formulario]")?.addEventListener("submit", (e) => {
   e.preventDefault();
   const dados = new FormData(e.target);
   const linhas = [
-    "Olá, Martins Imóveis!",
+    "Olá, S.J. Martins!",
     `Meu nome é ${dados.get("nome") || ""}.`,
     `Meu WhatsApp é ${dados.get("telefone") || ""}.`,
     `Objetivo: ${dados.get("objetivo") || ""}.`,
@@ -72,7 +72,7 @@ $("[data-formulario]")?.addEventListener("submit", (e) => {
   ].filter(Boolean);
 
   window.open(
-    `https://wa.me/${WHATSAPP_MARTINS}?text=${encodeURIComponent(linhas.join("\n"))}`,
+    `https://wa.me/${WHATSAPP_SJMARTINS}?text=${encodeURIComponent(linhas.join("\n"))}`,
     "_blank",
     "noopener,noreferrer"
   );
@@ -132,8 +132,8 @@ const cartaoHtml = (a) => {
     .map((item) => `<li>${escapar(item)}</li>`)
     .join("");
   const foto = a.foto && /^(https?:\/\/|\/fotos\/)/i.test(a.foto) ? a.foto : arteDaCategoria(a.categoria);
-  const mensagem = `Olá, Martins! Tenho interesse no imóvel "${a.titulo}"${onde ? ` (${onde})` : ""}.`;
-  const whatsapp = `https://wa.me/${WHATSAPP_MARTINS}?text=${encodeURIComponent(mensagem)}`;
+  const mensagem = `Olá, S.J. Martins! Tenho interesse no imóvel "${a.titulo}"${onde ? ` (${onde})` : ""}.`;
+  const whatsapp = `https://wa.me/${WHATSAPP_SJMARTINS}?text=${encodeURIComponent(mensagem)}`;
 
   return `<article class="cartao-imovel">
     <img src="${escapar(foto)}" alt="${escapar(a.titulo)}" loading="lazy" />
@@ -264,7 +264,7 @@ const novoVisitorId = () => {
 
 // Persistência no navegador: lembra o visitante e o que ele já contou, para
 // não repetir perguntas em visitas futuras. Tolera localStorage bloqueado.
-const CHAVE_STORAGE = "martins_conversa";
+const CHAVE_STORAGE = "sjmartins_conversa";
 const lerGuardado = () => {
   try {
     return JSON.parse(window.localStorage.getItem(CHAVE_STORAGE) || "{}") || {};
@@ -332,7 +332,7 @@ const telefoneDoLink = (url) => {
   if (direto) return direto[1];
   const query = url.match(/[?&]phone=(\d+)/i);
   if (query) return query[1];
-  return WHATSAPP_MARTINS;
+  return WHATSAPP_SJMARTINS;
 };
 
 // Extrai os pares "Rótulo: valor" do bloco FICHA_CLIENTE da resposta da Ana.
@@ -369,7 +369,7 @@ const mensagemDaFicha = (campos) => {
   const mapa = {};
   for (const { campo, valor } of campos) mapa[campo] = valor;
 
-  const frases = ["Olá, Martins Imóveis!"];
+  const frases = ["Olá, S.J. Martins!"];
   frases.push(mapa["nome"] ? `Meu nome é ${mapa["nome"]} e falei com a Ana no site.` : "Falei com a Ana no site.");
   if (mapa["objetivo"]) frases.push(`Quero ${objetivoEmFrase(mapa["objetivo"])}.`);
   if (mapa["tipo"]) frases.push(`Tipo de imóvel: ${mapa["tipo"]}.`);
@@ -389,12 +389,12 @@ const mensagemDaFicha = (campos) => {
 };
 
 const linkWhatsapp = (urlOriginal, camposNovos) => {
-  const telefone = telefoneDoLink(urlOriginal || `https://wa.me/${WHATSAPP_MARTINS}`);
+  const telefone = telefoneDoLink(urlOriginal || `https://wa.me/${WHATSAPP_SJMARTINS}`);
   const campos = camposNovos && camposNovos.length > 0 ? camposNovos : conversa.ficha;
   const texto =
     campos && campos.length > 0
       ? mensagemDaFicha(campos)
-      : "Olá, Martins Imóveis! Falei com a Ana no site e gostaria de continuar a conversa.";
+      : "Olá, S.J. Martins! Falei com a Ana no site e gostaria de continuar a conversa.";
   return `https://wa.me/${telefone}?text=${encodeURIComponent(texto)}`;
 };
 
@@ -499,7 +499,7 @@ const iniciarConversa = () => {
         ? `Que bom te ver de novo, ${nome}! Quer continuar de onde paramos ou falar de outro imóvel?`
         : conversa.voltou
           ? "Oi de novo! Quer continuar nossa conversa ou falar de outra coisa?"
-          : "Oi! Eu sou a Ana, da Martins Imóveis. Você quer comprar, vender ou alugar um imóvel?";
+          : "Oi! Eu sou a Ana, assistente de S.J. Martins. Você quer comprar, vender ou alugar um imóvel?";
   }
   chatInput?.focus();
 };
@@ -547,7 +547,7 @@ chatForm?.addEventListener("submit", async (e) => {
         .join(" ")
         .replace(/\s{2,}/g, " ")
         .trim();
-      const balao = adicionarBalao(textoLimpo || "Vou te passar para o WhatsApp da Martins.", "ana");
+      const balao = adicionarBalao(textoLimpo || "Vou te passar para o WhatsApp de S.J. Martins.", "ana");
       anexarBotaoWhats(balao, url);
       // Tenta abrir direto (pode ser bloqueado; o botão acima cobre isso).
       window.open(url, "_blank", "noopener,noreferrer");
@@ -557,7 +557,7 @@ chatForm?.addEventListener("submit", async (e) => {
   } catch (erro) {
     digitando?.remove();
     const balaoErro = adicionarBalao(
-      "Tive um problema para responder agora. Você pode falar direto com a equipe da Martins pelo WhatsApp.",
+      "Tive um problema para responder agora. Você pode falar direto com S.J. Martins pelo WhatsApp.",
       "ana erro"
     );
     anexarBotaoWhats(balaoErro, linkWhatsapp(), "Falar no WhatsApp");

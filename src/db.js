@@ -10,7 +10,7 @@ const raiz = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const dataDir = process.env.DATA_DIR || path.join(raiz, 'data');
 fs.mkdirSync(dataDir, { recursive: true });
 
-const db = new Database(path.join(dataDir, 'martins.db'));
+const db = new Database(path.join(dataDir, 'sjmartins.db'));
 db.pragma('journal_mode = WAL');
 db.pragma('foreign_keys = ON');
 

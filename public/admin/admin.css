@@ -1,5 +1,5 @@
 /* ============================================================
-   Martins Imóveis — painel administrativo
+   S.J. Martins Corretor de Imóveis — painel administrativo
    ============================================================ */
 
 :root {
@@ -66,7 +66,8 @@ button {
   background: var(--verde);
   color: #fff;
   font-weight: 700;
-  font-size: 19px;
+  font-size: 15px;
+  letter-spacing: 0.5px;
 }
 
 .barra-marca strong {
