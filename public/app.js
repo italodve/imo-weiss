@@ -1,11 +1,11 @@
 /* ============================================================
-   Weiss Imóveis — site público
+   Cabral Imóveis — site público
    Vitrine dinâmica (API /api/catalogo) + chat com a Ana (Claude)
    ============================================================ */
 
-// WhatsApp oficial da Weiss (somente dígitos, com DDI). Se mudar, mantenha
+// WhatsApp oficial da Cabral (somente dígitos, com DDI). Se mudar, mantenha
 // igual ao WHATSAPP_NUMBER do backend e aos links wa.me do index.html.
-const WHATSAPP_WEISS = "551134289080";
+const WHATSAPP_CABRAL = "5511982313938";
 
 // Base da API. Vazio = mesma origem (site e API no mesmo servidor).
 const API_BASE = "";
@@ -64,7 +64,7 @@ $("[data-formulario]")?.addEventListener("submit", (e) => {
   e.preventDefault();
   const dados = new FormData(e.target);
   const linhas = [
-    "Olá, Weiss Imóveis!",
+    "Olá, Cabral Imóveis!",
     `Meu nome é ${dados.get("nome") || ""}.`,
     `Meu WhatsApp é ${dados.get("telefone") || ""}.`,
     `Objetivo: ${dados.get("objetivo") || ""}.`,
@@ -72,7 +72,7 @@ $("[data-formulario]")?.addEventListener("submit", (e) => {
   ].filter(Boolean);
 
   window.open(
-    `https://wa.me/${WHATSAPP_WEISS}?text=${encodeURIComponent(linhas.join("\n"))}`,
+    `https://wa.me/${WHATSAPP_CABRAL}?text=${encodeURIComponent(linhas.join("\n"))}`,
     "_blank",
     "noopener,noreferrer"
   );
@@ -132,8 +132,8 @@ const cartaoHtml = (a) => {
     .map((item) => `<li>${escapar(item)}</li>`)
     .join("");
   const foto = a.foto && /^(https?:\/\/|\/fotos\/)/i.test(a.foto) ? a.foto : arteDaCategoria(a.categoria);
-  const mensagem = `Olá, Weiss! Tenho interesse no imóvel "${a.titulo}"${onde ? ` (${onde})` : ""}.`;
-  const whatsapp = `https://wa.me/${WHATSAPP_WEISS}?text=${encodeURIComponent(mensagem)}`;
+  const mensagem = `Olá, Cabral! Tenho interesse no imóvel "${a.titulo}"${onde ? ` (${onde})` : ""}.`;
+  const whatsapp = `https://wa.me/${WHATSAPP_CABRAL}?text=${encodeURIComponent(mensagem)}`;
 
   return `<article class="cartao-imovel">
     <img src="${escapar(foto)}" alt="${escapar(a.titulo)}" loading="lazy" />
@@ -264,7 +264,7 @@ const novoVisitorId = () => {
 
 // Persistência no navegador: lembra o visitante e o que ele já contou, para
 // não repetir perguntas em visitas futuras. Tolera localStorage bloqueado.
-const CHAVE_STORAGE = "weiss_conversa";
+const CHAVE_STORAGE = "cabral_conversa";
 const lerGuardado = () => {
   try {
     return JSON.parse(window.localStorage.getItem(CHAVE_STORAGE) || "{}") || {};
@@ -332,7 +332,7 @@ const telefoneDoLink = (url) => {
   if (direto) return direto[1];
   const query = url.match(/[?&]phone=(\d+)/i);
   if (query) return query[1];
-  return WHATSAPP_WEISS;
+  return WHATSAPP_CABRAL;
 };
 
 // Extrai os pares "Rótulo: valor" do bloco FICHA_CLIENTE da resposta da Ana.
@@ -369,7 +369,7 @@ const mensagemDaFicha = (campos) => {
   const mapa = {};
   for (const { campo, valor } of campos) mapa[campo] = valor;
 
-  const frases = ["Olá, Weiss Imóveis!"];
+  const frases = ["Olá, Cabral Imóveis!"];
   frases.push(mapa["nome"] ? `Meu nome é ${mapa["nome"]} e falei com a Ana no site.` : "Falei com a Ana no site.");
   if (mapa["objetivo"]) frases.push(`Quero ${objetivoEmFrase(mapa["objetivo"])}.`);
   if (mapa["tipo"]) frases.push(`Tipo de imóvel: ${mapa["tipo"]}.`);
@@ -389,12 +389,12 @@ const mensagemDaFicha = (campos) => {
 };
 
 const linkWhatsapp = (urlOriginal, camposNovos) => {
-  const telefone = telefoneDoLink(urlOriginal || `https://wa.me/${WHATSAPP_WEISS}`);
+  const telefone = telefoneDoLink(urlOriginal || `https://wa.me/${WHATSAPP_CABRAL}`);
   const campos = camposNovos && camposNovos.length > 0 ? camposNovos : conversa.ficha;
   const texto =
     campos && campos.length > 0
       ? mensagemDaFicha(campos)
-      : "Olá, Weiss Imóveis! Falei com a Ana no site e gostaria de continuar a conversa.";
+      : "Olá, Cabral Imóveis! Falei com a Ana no site e gostaria de continuar a conversa.";
   return `https://wa.me/${telefone}?text=${encodeURIComponent(texto)}`;
 };
 
@@ -499,7 +499,7 @@ const iniciarConversa = () => {
         ? `Que bom te ver de novo, ${nome}! Quer continuar de onde paramos ou falar de outro imóvel?`
         : conversa.voltou
           ? "Oi de novo! Quer continuar nossa conversa ou falar de outra coisa?"
-          : "Oi! Eu sou a Ana, da Weiss Imóveis. Você quer comprar, vender ou alugar um imóvel?";
+          : "Oi! Eu sou a Ana, da Cabral Imóveis. Você quer comprar, vender ou alugar um imóvel?";
   }
   chatInput?.focus();
 };
@@ -547,7 +547,7 @@ chatForm?.addEventListener("submit", async (e) => {
         .join(" ")
         .replace(/\s{2,}/g, " ")
         .trim();
-      const balao = adicionarBalao(textoLimpo || "Vou te passar para o WhatsApp da Weiss.", "ana");
+      const balao = adicionarBalao(textoLimpo || "Vou te passar para o WhatsApp da Cabral.", "ana");
       anexarBotaoWhats(balao, url);
       // Tenta abrir direto (pode ser bloqueado; o botão acima cobre isso).
       window.open(url, "_blank", "noopener,noreferrer");
@@ -557,7 +557,7 @@ chatForm?.addEventListener("submit", async (e) => {
   } catch (erro) {
     digitando?.remove();
     const balaoErro = adicionarBalao(
-      "Tive um problema para responder agora. Você pode falar direto com a equipe da Weiss pelo WhatsApp.",
+      "Tive um problema para responder agora. Você pode falar direto com a equipe da Cabral pelo WhatsApp.",
       "ana erro"
     );
     anexarBotaoWhats(balaoErro, linkWhatsapp(), "Falar no WhatsApp");

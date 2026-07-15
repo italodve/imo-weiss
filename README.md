@@ -1,6 +1,6 @@
-# Weiss Imóveis — Plataforma Imobiliária Integrada
+# Cabral Imóveis — Plataforma Imobiliária Integrada
 
-Plataforma da **Weiss Imóveis** (imobiliária boutique da zona oeste de São
+Plataforma da **Cabral Imóveis** (imobiliária boutique da zona oeste de São
 Paulo): site institucional + painel administrativo + assistente de IA
 (Claude) em **um único serviço** Node/Express. Todos os dados vivem em um
 banco SQLite embutido no mesmo deploy — nenhum serviço externo além da API
@@ -8,7 +8,7 @@ da Anthropic.
 
 | Rota | O que é |
 | --- | --- |
-| `/` | Site público da Weiss Imóveis, com a vitrine de imóveis e o chat da Ana |
+| `/` | Site público da Cabral Imóveis, com a vitrine de imóveis e o chat da Ana |
 | `/admin` | Painel: publica anúncios no site e recebe as fichas de clientes (login) |
 | `/api/catalogo` | API pública que alimenta a vitrine do site |
 | `/api/conversa/*`, `/api/ficha`, `/health` | API do assistente de IA (Claude) |
@@ -65,12 +65,12 @@ npm start
 # http://localhost:3000/admin  → painel (login com ADMIN_USER/ADMIN_PASSWORD)
 ```
 
-O banco é criado sozinho em `./data/weiss.db` na primeira execução.
+O banco é criado sozinho em `./data/cabral.db` na primeira execução.
 
 ## Personalização
 
-- **WhatsApp**: o número oficial `+55 11 3428-9080` (`551134289080`) está em
-  três lugares — `WHATSAPP_NUMBER` no `.env`, a constante `WHATSAPP_WEISS` em
+- **WhatsApp**: o número oficial `+55 11 98231-3938` (`5511982313938`) está em
+  três lugares — `WHATSAPP_NUMBER` no `.env`, a constante `WHATSAPP_CABRAL` em
   `public/app.js` e os links `wa.me` de `public/index.html`. Se mudar no
   futuro, ajuste nos três.
 - **Textos e região**: cidade/bairros de atuação estão em
@@ -88,7 +88,7 @@ O banco é criado sozinho em `./data/weiss.db` na primeira execução.
    - `CONVERSA_SECRET` — segredo longo e aleatório
    - `ADMIN_USER` / `ADMIN_PASSWORD` — credenciais do painel
      (`ADMIN_PASSWORD` é obrigatória; sem ela o painel fica bloqueado)
-   - `WHATSAPP_NUMBER` — WhatsApp oficial da Weiss (dígitos com DDI)
+   - `WHATSAPP_NUMBER` — WhatsApp oficial da Cabral (dígitos com DDI)
    - `DATA_DIR=/data` — aponta o banco para o Volume
 4. O Railway detecta Node.js e usa o `railway.json` (start `npm start`,
    healthcheck em `/health`).

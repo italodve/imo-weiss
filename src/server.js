@@ -43,10 +43,10 @@ const INTERVALO_MINIMO_MSG_MS = 1500;
 const MAX_VISITANTES_ATIVOS = 1000;
 const ultimaAtividade = new Map();
 
-const adminUser = (process.env.ADMIN_USER || 'weiss').trim();
+const adminUser = (process.env.ADMIN_USER || 'cabral').trim();
 const adminPassword = (process.env.ADMIN_PASSWORD || '').trim();
 const ADMIN_SESSAO_TTL_MS = 7 * 24 * 60 * 60 * 1000;
-const ADMIN_COOKIE = 'weiss_admin';
+const ADMIN_COOKIE = 'cabral_admin';
 
 const MAX_CAMPOS_FICHA = 20;
 const MAX_TAMANHO_CAMPO = 200;

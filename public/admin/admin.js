@@ -1,5 +1,5 @@
 /* ============================================================
-   Weiss Imóveis — painel administrativo
+   Cabral Imóveis — painel administrativo
    Anúncios do site + fichas de clientes, tudo via /admin/api/*
    (protegido por login). Um anúncio salvo aqui entra no site na
    hora; as fichas chegam sozinhas pelo chat da Ana.
@@ -435,13 +435,13 @@ function ligarEventos() {
   $("[data-exportar-anuncios]").addEventListener("click", () => {
     const cabecalho = ["Título", "Categoria", "Negócio", "Situação", "Preço", "Bairro", "Cidade", "Quartos", "Banheiros", "Vagas", "Área", "Detalhes"];
     const linhas = estado.anuncios.map((a) => [a.titulo, a.categoria, a.negocio, a.situacao, a.preco, a.bairro, a.cidade, a.quartos, a.banheiros, a.vagas, a.area, a.detalhes]);
-    baixarCsv("anuncios-weiss.csv", [cabecalho, ...linhas]);
+    baixarCsv("anuncios-cabral.csv", [cabecalho, ...linhas]);
   });
 
   $("[data-exportar-fichas]").addEventListener("click", () => {
     const cabecalho = ["Data", "Dados", "Origem", "Etapa"];
     const linhas = estado.fichas.map((f) => [f.criadoEm, fichaEmTexto(f.campos), f.origem, ETAPA_ROTULO[f.etapa]]);
-    baixarCsv("fichas-weiss.csv", [cabecalho, ...linhas]);
+    baixarCsv("fichas-cabral.csv", [cabecalho, ...linhas]);
   });
 }
 
