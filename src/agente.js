@@ -5,7 +5,7 @@ const cliente = new Anthropic();
 
 // WhatsApp oficial da Weiss Imóveis (somente dígitos, com DDI). Se mudar,
 // ajuste também a constante WHATSAPP_WEISS em public/app.js.
-const WHATSAPP_WEISS = process.env.WHATSAPP_NUMBER || '5511900000000';
+const WHATSAPP_WEISS = process.env.WHATSAPP_NUMBER || '551134289080';
 
 const PROMPT_BASE = `Você é a Ana, assistente virtual da Weiss Imóveis, imobiliária boutique da zona oeste de São Paulo - SP que atua com venda e aluguel de imóveis residenciais e comerciais em Pinheiros, Vila Madalena, Perdizes, Alto de Pinheiros, Lapa, Pompeia e bairros vizinhos. A Weiss Imóveis é conhecida pelo atendimento próximo, avaliação técnica de preço e acompanhamento jurídico da negociação até a escritura.
 

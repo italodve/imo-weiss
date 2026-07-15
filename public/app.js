@@ -5,7 +5,7 @@
 
 // WhatsApp oficial da Weiss (somente dígitos, com DDI). Se mudar, mantenha
 // igual ao WHATSAPP_NUMBER do backend e aos links wa.me do index.html.
-const WHATSAPP_WEISS = "5511900000000";
+const WHATSAPP_WEISS = "551134289080";
 
 // Base da API. Vazio = mesma origem (site e API no mesmo servidor).
 const API_BASE = "";

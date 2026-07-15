@@ -69,10 +69,10 @@ O banco é criado sozinho em `./data/weiss.db` na primeira execução.
 
 ## Personalização
 
-- **WhatsApp**: o número placeholder `5511900000000` está em três lugares —
-  `WHATSAPP_NUMBER` no `.env`, a constante `WHATSAPP_WEISS` em
-  `public/app.js` e os links `wa.me` de `public/index.html`. Troque nos três
-  ao definir o número oficial.
+- **WhatsApp**: o número oficial `+55 11 3428-9080` (`551134289080`) está em
+  três lugares — `WHATSAPP_NUMBER` no `.env`, a constante `WHATSAPP_WEISS` em
+  `public/app.js` e os links `wa.me` de `public/index.html`. Se mudar no
+  futuro, ajuste nos três.
 - **Textos e região**: cidade/bairros de atuação estão em
   `public/index.html` e no prompt de `src/agente.js`.
 - **Identidade visual**: cores e fontes ficam nas variáveis CSS no topo de
