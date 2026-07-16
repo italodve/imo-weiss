@@ -87,9 +87,9 @@ const escapar = (str) =>
 
 // Amostra exibida quando a API está fora do ar ou o painel ainda está vazio.
 const AMOSTRA = [
-  { titulo: "Apartamento com varanda verde", categoria: "Apartamento", negocio: "Venda", bairro: "Tatuapé", cidade: "São Paulo", quartos: 2, banheiros: 2, vagas: 1, area: 74, preco: 890000 },
-  { titulo: "Casa de vila reformada", categoria: "Casa", negocio: "Venda", bairro: "Santana", cidade: "São Paulo", quartos: 3, banheiros: 2, vagas: 1, area: 120, preco: 1450000 },
-  { titulo: "Studio pronto para morar", categoria: "Apartamento", negocio: "Aluguel", bairro: "Moema", cidade: "São Paulo", quartos: 1, banheiros: 1, vagas: 1, area: 38, preco: 3200 }
+  { titulo: "Apartamento com varanda verde", categoria: "Apartamento", negocio: "Venda", bairro: "Tatuapé", cidade: "São Paulo", quartos: 2, banheiros: 2, vagas: 1, area: 74, preco: 890000, foto: "imovel-apartamento.jpg" },
+  { titulo: "Casa de vila reformada", categoria: "Casa", negocio: "Venda", bairro: "Santana", cidade: "São Paulo", quartos: 3, banheiros: 2, vagas: 1, area: 120, preco: 1450000, foto: "imovel-casa.jpg" },
+  { titulo: "Studio pronto para morar", categoria: "Apartamento", negocio: "Aluguel", bairro: "Moema", cidade: "São Paulo", quartos: 1, banheiros: 1, vagas: 1, area: 38, preco: 3200, foto: "imovel-studio.jpg" }
 ];
 
 // Ilustração de fallback por categoria (SVG inline — nenhum arquivo externo).
@@ -131,7 +131,10 @@ const cartaoHtml = (a) => {
     .filter(Boolean)
     .map((item) => `<li>${escapar(item)}</li>`)
     .join("");
-  const foto = a.foto && /^(https?:\/\/|\/fotos\/)/i.test(a.foto) ? a.foto : arteDaCategoria(a.categoria);
+  // Aceita URL, foto enviada pelo painel (/fotos/...) ou arquivo local do site
+  // (fotos das amostras embutidas, ex.: imovel-apartamento.jpg).
+  const fotoValida = a.foto && /^(https?:\/\/|\/fotos\/|[\w-]+\.(?:jpe?g|png|webp))/i.test(a.foto);
+  const foto = fotoValida ? a.foto : arteDaCategoria(a.categoria);
   const mensagem = `Olá, S.J. Martins! Tenho interesse no imóvel "${a.titulo}"${onde ? ` (${onde})` : ""}.`;
   const whatsapp = `https://wa.me/${WHATSAPP_SJMARTINS}?text=${encodeURIComponent(mensagem)}`;
 
