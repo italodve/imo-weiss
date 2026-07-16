@@ -505,7 +505,10 @@ app.use(
 app.use(
   express.static(publicDir, {
     setHeaders(res, filePath) {
-      const cacheControl = filePath.endsWith('.html')
+      // HTML, CSS e JS sempre revalidam (o servidor responde 304 quando nada
+      // mudou) — evita a mistura de HTML novo com JS/CSS velhos no cache do
+      // navegador. Imagens e demais assets podem ficar 24h em cache.
+      const cacheControl = /\.(html|css|js)$/.test(filePath)
         ? 'no-cache'
         : 'public, max-age=86400';
       res.setHeader('Cache-Control', cacheControl);
