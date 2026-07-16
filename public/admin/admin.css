@@ -420,40 +420,120 @@ button {
   margin-top: 6px;
 }
 
-/* ---- tabela de fichas ---- */
+/* ---- funil de fichas (kanban) ---- */
 
-.rolagem-tabela {
-  overflow-x: auto;
+.funil {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  align-items: start;
+}
+
+.funil-col {
   background: var(--cartao);
   border: 1px solid var(--linha);
   border-radius: var(--raio);
+  padding: 14px;
+  transition: border-color 0.15s, background 0.15s;
 }
 
-.tabela {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 14px;
-  min-width: 640px;
+.funil-col.recebendo {
+  border-color: var(--verde);
+  background: var(--verde-claro);
 }
 
-.tabela th {
-  text-align: left;
-  font-size: 12px;
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
+.funil-cabeca {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.funil-ponto {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+}
+
+.funil-col.recebido .funil-ponto {
+  background: var(--ouro);
+}
+
+.funil-col.conversando .funil-ponto {
+  background: #b3742f;
+}
+
+.funil-col.fechado .funil-ponto {
+  background: var(--verde);
+}
+
+.funil-total {
+  margin-left: auto;
+  background: var(--fundo);
+  border: 1px solid var(--linha);
+  border-radius: 999px;
+  padding: 1px 10px;
+  font-size: 12.5px;
+}
+
+.funil-corpo {
+  display: grid;
+  gap: 10px;
+  min-height: 76px;
+}
+
+.funil-solte {
+  display: grid;
+  place-items: center;
+  min-height: 72px;
+  border: 1.5px dashed var(--linha);
+  border-radius: 10px;
   color: var(--tinta-suave);
-  padding: 12px 14px;
-  border-bottom: 1px solid var(--linha);
+  font-size: 13px;
 }
 
-.tabela td {
+.lead-card {
+  background: var(--fundo);
+  border: 1px solid var(--linha);
+  border-radius: 12px;
   padding: 12px 14px;
-  border-bottom: 1px solid var(--linha);
-  vertical-align: top;
+  display: grid;
+  gap: 8px;
+  cursor: grab;
 }
 
-.tabela tr:last-child td {
-  border-bottom: 0;
+.lead-card.arrastando {
+  opacity: 0.45;
+  cursor: grabbing;
+}
+
+.lead-card-topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.lead-excluir {
+  border: 0;
+  background: none;
+  color: var(--tinta-suave);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 2px 6px;
+}
+
+.lead-excluir:hover {
+  color: var(--erro);
+}
+
+.lead-meta {
+  color: var(--tinta-suave);
+  font-size: 12px;
+  overflow-wrap: anywhere;
 }
 
 .ficha-nome {
@@ -474,6 +554,11 @@ button {
   border-radius: 999px;
   padding: 2px 9px;
   color: var(--tinta-suave);
+}
+
+/* Dentro do card do funil (fundo bege), as tags ficam brancas para contrastar. */
+.lead-card .ficha-tag {
+  background: var(--cartao);
 }
 
 .etapa-select {
@@ -624,7 +709,8 @@ button {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .colunas {
+  .colunas,
+  .funil {
     grid-template-columns: 1fr;
   }
 

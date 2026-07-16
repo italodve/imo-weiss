@@ -212,39 +212,69 @@ function desenharAnuncios() {
     .join("");
 }
 
-/* ---- tela: FICHAS ---- */
+/* ---- tela: FICHAS (funil kanban) ---- */
+
+// HTML de um card de ficha, arrastável entre as colunas do funil.
+function cardDeFichaHtml(f) {
+  const opcoes = ETAPAS.map(
+    (e) => `<option value="${e}" ${e === f.etapa ? "selected" : ""}>${ETAPA_ROTULO[e]}</option>`
+  ).join("");
+  const meta = [dataCurta(f.criadoEm), f.origem].filter(Boolean).map(escapar).join(" · ");
+  return `<div class="lead-card" draggable="true" data-ficha-id="${f.id}">
+    <div class="lead-card-topo">
+      <strong class="ficha-nome">${escapar(nomeDaFicha(f.campos))}</strong>
+      <button class="lead-excluir" data-excluir-ficha="${f.id}" type="button" title="Excluir ficha" aria-label="Excluir ficha">×</button>
+    </div>
+    <div class="ficha-tags">${tagsDaFicha(f.campos)}</div>
+    ${meta ? `<small class="lead-meta">${meta}</small>` : ""}
+    <select class="etapa-select ${escapar(f.etapa)}" data-etapa-ficha="${f.id}" aria-label="Etapa da ficha">${opcoes}</select>
+  </div>`;
+}
 
 function desenharFichas() {
   const termo = $("[data-filtro-ficha-texto]").value.trim().toLowerCase();
-  const etapa = $("[data-filtro-ficha-etapa]").value;
 
-  const lista = estado.fichas.filter((f) => {
-    const bateTermo =
+  const visiveis = estado.fichas.filter(
+    (f) =>
       !termo ||
-      [fichaEmTexto(f.campos), f.origem, f.criadoEm].some((v) => String(v || "").toLowerCase().includes(termo));
-    const bateEtapa = !etapa || f.etapa === etapa;
-    return bateTermo && bateEtapa;
-  });
+      [fichaEmTexto(f.campos), f.origem, f.criadoEm].some((v) => String(v || "").toLowerCase().includes(termo))
+  );
 
   $("[data-fichas-vazio]").hidden = estado.fichas.length !== 0;
 
-  $("[data-linhas-fichas]").innerHTML = lista
-    .map((f) => {
-      const opcoes = ETAPAS.map(
-        (e) => `<option value="${e}" ${e === f.etapa ? "selected" : ""}>${ETAPA_ROTULO[e]}</option>`
-      ).join("");
-      const dados = f.campos.length
-        ? `<span class="ficha-nome">${escapar(nomeDaFicha(f.campos))}</span><div class="ficha-tags">${tagsDaFicha(f.campos)}</div>`
-        : "—";
-      return `<tr>
-        <td>${escapar(dataCurta(f.criadoEm) || "—")}</td>
-        <td>${dados}</td>
-        <td>${escapar(f.origem || "—")}</td>
-        <td><select class="etapa-select ${escapar(f.etapa)}" data-etapa-ficha="${f.id}">${opcoes}</select></td>
-        <td><button class="apagar" data-excluir-ficha="${f.id}" type="button">Excluir</button></td>
-      </tr>`;
-    })
-    .join("");
+  $("[data-funil]").innerHTML = ETAPAS.map((etapa) => {
+    const fichas = visiveis.filter((f) => f.etapa === etapa);
+    const cards = fichas.map(cardDeFichaHtml).join("");
+    return `<div class="funil-col ${etapa}" data-etapa-col="${etapa}">
+      <div class="funil-cabeca">
+        <span class="funil-ponto" aria-hidden="true"></span>
+        <span>${ETAPA_ROTULO[etapa]}</span>
+        <b class="funil-total">${fichas.length}</b>
+      </div>
+      <div class="funil-corpo">${cards || '<p class="funil-solte">Solte uma ficha aqui</p>'}</div>
+    </div>`;
+  }).join("");
+}
+
+// Move a ficha de etapa com atualização otimista (reverte se a API falhar).
+// Usado tanto pelo select do card quanto pelo arraste entre colunas.
+async function moverFichaDeEtapa(id, etapa) {
+  if (!id || !ETAPAS.includes(etapa)) return;
+  const ficha = estado.fichas.find((f) => String(f.id) === String(id));
+  if (!ficha || ficha.etapa === etapa) return;
+
+  const anterior = ficha.etapa;
+  ficha.etapa = etapa;
+  desenharResumo();
+  desenharFichas();
+  try {
+    await api(`/fichas/${id}`, { method: "PATCH", body: { etapa } });
+  } catch (err) {
+    ficha.etapa = anterior;
+    desenharResumo();
+    desenharFichas();
+    avisar(`Não foi possível mover a ficha: ${err.message}`);
+  }
 }
 
 function desenharTudo() {
@@ -377,7 +407,6 @@ function ligarEventos() {
   $("[data-filtro-anuncio-texto]").addEventListener("input", desenharAnuncios);
   $("[data-filtro-anuncio-situacao]").addEventListener("change", desenharAnuncios);
   $("[data-filtro-ficha-texto]").addEventListener("input", desenharFichas);
-  $("[data-filtro-ficha-etapa]").addEventListener("change", desenharFichas);
 
   // ações nos cards de anúncio (delegação)
   $("[data-grade-anuncios]").addEventListener("click", async (e) => {
@@ -396,29 +425,17 @@ function ligarEventos() {
     }
   });
 
-  // etapa e exclusão de fichas
-  $("[data-linhas-fichas]").addEventListener("change", async (e) => {
-    const id = e.target.getAttribute("data-etapa-ficha");
-    if (!id) return;
-    const etapa = e.target.value;
-    const ficha = estado.fichas.find((f) => String(f.id) === String(id));
-    if (!ficha || !ETAPAS.includes(etapa) || ficha.etapa === etapa) return;
+  // ---- funil de fichas (delegação no container) ----
+  const funil = $("[data-funil]");
 
-    const anterior = ficha.etapa;
-    ficha.etapa = etapa;
-    desenharResumo();
-    desenharFichas();
-    try {
-      await api(`/fichas/${id}`, { method: "PATCH", body: { etapa } });
-    } catch (err) {
-      ficha.etapa = anterior;
-      desenharResumo();
-      desenharFichas();
-      avisar(`Não foi possível mover a ficha: ${err.message}`);
-    }
+  // Mudança de etapa pelo select do card (alternativa ao arraste no celular).
+  funil.addEventListener("change", (e) => {
+    const id = e.target.getAttribute("data-etapa-ficha");
+    if (id) moverFichaDeEtapa(id, e.target.value);
   });
 
-  $("[data-linhas-fichas]").addEventListener("click", async (e) => {
+  // Exclusão pelo × do card.
+  funil.addEventListener("click", async (e) => {
     const id = e.target.getAttribute("data-excluir-ficha");
     if (!id) return;
     if (!confirm("Excluir esta ficha? Esta ação não pode ser desfeita.")) return;
@@ -430,6 +447,38 @@ function ligarEventos() {
     } catch (err) {
       avisar(`Não foi possível excluir: ${err.message}`);
     }
+  });
+
+  // Arrastar cards entre as colunas do funil.
+  funil.addEventListener("dragstart", (e) => {
+    const card = e.target.closest(".lead-card");
+    if (!card) return;
+    e.dataTransfer.setData("text/plain", card.dataset.fichaId);
+    e.dataTransfer.effectAllowed = "move";
+    card.classList.add("arrastando");
+  });
+  funil.addEventListener("dragend", (e) => {
+    e.target.closest(".lead-card")?.classList.remove("arrastando");
+    $$(".funil-col").forEach((c) => c.classList.remove("recebendo"));
+  });
+  funil.addEventListener("dragover", (e) => {
+    const col = e.target.closest(".funil-col");
+    if (!col) return;
+    e.preventDefault(); // libera o drop nesta coluna
+    e.dataTransfer.dropEffect = "move";
+    $$(".funil-col").forEach((c) => c.classList.toggle("recebendo", c === col));
+  });
+  funil.addEventListener("dragleave", (e) => {
+    if (!funil.contains(e.relatedTarget)) {
+      $$(".funil-col").forEach((c) => c.classList.remove("recebendo"));
+    }
+  });
+  funil.addEventListener("drop", (e) => {
+    const col = e.target.closest(".funil-col");
+    $$(".funil-col").forEach((c) => c.classList.remove("recebendo"));
+    if (!col) return;
+    e.preventDefault();
+    moverFichaDeEtapa(e.dataTransfer.getData("text/plain"), col.dataset.etapaCol);
   });
 
   $("[data-exportar-anuncios]").addEventListener("click", () => {

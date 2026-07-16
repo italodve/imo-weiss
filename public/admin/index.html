@@ -101,28 +101,11 @@
       <section class="tela" data-tela="fichas">
         <div class="ferramentas">
           <input type="search" placeholder="Buscar ficha…" data-filtro-ficha-texto />
-          <select data-filtro-ficha-etapa>
-            <option value="">Todas as etapas</option>
-            <option value="recebido">Recebido</option>
-            <option value="conversando">Conversando</option>
-            <option value="fechado">Fechado</option>
-          </select>
           <button class="botao vazado" type="button" data-exportar-fichas>Exportar CSV</button>
         </div>
-        <div class="rolagem-tabela">
-          <table class="tabela">
-            <thead>
-              <tr>
-                <th>Data</th>
-                <th>Cliente</th>
-                <th>Origem</th>
-                <th>Etapa</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody data-linhas-fichas></tbody>
-          </table>
-        </div>
+        <!-- Funil kanban: uma coluna por etapa; os cards podem ser arrastados
+             entre as colunas (ou movidos pelo select, em telas de toque). -->
+        <div class="funil" data-funil></div>
         <p class="sem-dados" data-fichas-vazio hidden>
           Nenhuma ficha ainda. Elas chegam sozinhas quando a Ana conversa com visitantes do site.
         </p>
